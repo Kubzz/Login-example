@@ -66,8 +66,9 @@ public class UpdateController {
         if (node.has("email")) {
             user.setEmail(node.get("email").toString());
         }
-
-        //add name
+        if (node.has("name")) {
+            user.setName(node.get("name").toString());
+        }
 
         userRepository.save(user);
 
