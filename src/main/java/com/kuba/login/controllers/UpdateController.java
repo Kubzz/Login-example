@@ -61,13 +61,13 @@ public class UpdateController {
         User user = userRepository.findById(id).get();
 
         if (node.has("username")) {
-            user.setUsername(node.get("username").toString());
+            user.setUsername(node.get("username").asText());
         }
         if (node.has("email")) {
-            user.setEmail(node.get("email").toString());
+            user.setEmail(node.get("email").asText());
         }
         if (node.has("name")) {
-            user.setName(node.get("name").toString());
+            user.setName(node.get("name").asText());
         }
 
         userRepository.save(user);
