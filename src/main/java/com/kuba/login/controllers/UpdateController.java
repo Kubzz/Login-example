@@ -22,30 +22,6 @@ public class UpdateController {
     @Autowired
     UserRepository userRepository;
 
-    @Autowired
-    PasswordEncoder encoder;
-
-    @PutMapping("/updatepassword")
-    public ResponseEntity<?> updateUserPassword(@RequestBody JsonNode node) {
-
-        if (node.size() < 1) {
-            return ResponseEntity.badRequest().body(new MessageResponse("No Put Body"));
-        } else if (!node.has("id")) {
-            return ResponseEntity.badRequest().body(new MessageResponse("No User id"));
-        } else if (!node.has("password")) {
-            return ResponseEntity.badRequest().body(new MessageResponse("No New password"));
-        }
-
-        Long id = Long.valueOf(node.get("id").asText());
-        String password = node.get("password").toString();
-
-        User user = userRepository.findById(id).get();
-        user.setPassword(encoder.encode(password));
-        userRepository.save(user);
-
-        return ResponseEntity.ok(new MessageResponse("Updated password successfully"));
-    }
-
     @PutMapping("/updatedetails")
     public ResponseEntity<?> updateUser(@RequestBody JsonNode node) {
 
